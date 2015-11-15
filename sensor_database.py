@@ -12,7 +12,8 @@ cursor = dbConn.cursor()
 device = '/dev/ttyACM0' #this will have to be changed to the serial port you are using
 try:
   print "Trying...",device 
-  arduino = serial.Serial(device, 115200) 
+  arduino = serial.Serial(device, 9600)
+  print "Connected...."
 except: 
   print "Failed to connect on",device    
 while True:
@@ -21,7 +22,7 @@ while True:
       #pieces = data.split("\t")  #split the data by the tab
       #Here we are going to insert the data into the Database
       try:
-        cursor.execute("id int NOT NULL AUTO_INCREMENT")  
+        #cursor.execute("id int NOT NULL AUTO_INCREMENT")  
         cursor.execute("INSERT INTO distance (distance_cm) VALUES (%s)", data)
         print "Data inserted"
         dbConn.commit() #commit the insert
